@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aum & Nok Wedding | Eternal Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Sarabun:wght@200;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --rustic-beige: #f9f5f0;
+            --warm-brown: #5d4a44;
+            --soft-peach: #e19b91;
+            --muted-pink: #d9a89e;
+            --gold: #c5a059;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--rustic-beige);
+            color: var(--warm-brown);
+            scroll-behavior: smooth;
+        }
+
+        .bg-pattern {
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: visible !important;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .font-script {
+            font-family: 'Pinyon Script', cursive;
+            text-shadow: 2px 2px 4px rgba(217, 168, 158, 0.2);
+            display: inline-block;
+        }
+
+        .font-elegant {
+            font-family: 'Charm', cursive;
+            letter-spacing: 1px;
+        }
+
+        /* --- Falling Petals Effect --- */
+        .petal {
+            position: absolute;
+            background-color: #ffc2e8;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Hero Styling --- */
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(249, 245, 240, 0) 0%, rgba(249, 245, 240, 1) 90%);
+        }
+
+        /* --- Profile Styling --- */
+        .profile-container {
+            position: relative;
+            padding: 15px;
+        }
+        .profile-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 300px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        .profile-round {
+            width: 270px; height: 270px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 8px solid white;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* --- Gallery Improved --- */
+        .slider-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 20px;
+        }
+
+        .slide {
+            flex: 0 0 calc(50% - 10px);
+            min-width: calc(50% - 10px);
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                flex: 0 0 100%;
+                min-width: 100%;
+            }
+        }
+
+        .no-frame {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            aspect-ratio: 4 / 5; /* บังคับสัดส่วนรูปภาพให้เท่ากัน */
+            background: #fff;
+        }
+
+        .no-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* รูปจะพอดีกรอบโดยไม่บิดเบี้ยว */
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .no-frame:hover img {
+            transform: scale(1.08);
+        }
+
+        /* --- Schedule Styling --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(93, 74, 68, 0.05);
+        }
+
+        .btn-premium {
+            background: var(--warm-brown);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 100px;
+            transition: all 0.4s;
+            box-shadow: 0 10px 20px rgba(93, 74, 68, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-premium:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-pattern">
+
+    <div id="petals-container"></div>
+
+    <section class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative bg-pattern">
+    
+    <div class="reveal mb-8">
+        <span class="inline-block h-[1px] w-12 bg-[#c5a059] align-middle"></span>
+        <span class="mx-4 uppercase tracking-[0.5em] text-[10px] md:text-xs opacity-60">The Wedding of</span>
+        <span class="inline-block h-[1px] w-12 bg-[#c5a059] align-middle"></span>
+    </div>
+    
+    <div class="reveal w-full max-w-4xl">
+        <h1 class="font-script text-[#d9a89e] flex flex-row items-center justify-center leading-none">
+            <span class="text-6xl md:text-8xl lg:text-9xl">Aum</span>
+            
+            <span class="mx-4 md:mx-8 text-3xl md:text-5xl lg:text-6xl text-red-500 animate-pulse">
+                ❤️
+            </span>
+            
+            <span class="text-6xl md:text-8xl lg:text-9xl">Nok</span>
+        </h1>
+    </div>
+
+    <div class="reveal mt-8 md:mt-12">
+        <p class="font-elegant text-2xl md:text-4xl text-[#5d4a44]/80 tracking-widest">
+            24 . 07 . 2026
+        </p>
+    </div>
+
+    <div id="countdown" class="reveal mt-10 flex gap-4 md:gap-8 bg-white/60 backdrop-blur-md p-6 px-8 md:px-12 rounded-[2rem] border border-white/80 shadow-xl">
+        <div class="text-center min-w-[60px]">
+            <span id="days" class="text-2xl md:text-4xl font-bold text-[#e19b91]">00</span>
+            <p class="text-[9px] uppercase tracking-widest opacity-50 mt-1">Days</p>
+        </div>
+        <div class="text-center min-w-[60px]">
+            <span id="hours" class="text-2xl md:text-4xl font-bold text-[#e19b91]">00</span>
+            <p class="text-[9px] uppercase tracking-widest opacity-50 mt-1">Hrs</p>
+        </div>
+        <div class="text-center min-w-[60px]">
+            <span id="minutes" class="text-2xl md:text-4xl font-bold text-[#e19b91]">00</span>
+            <p class="text-[9px] uppercase tracking-widest opacity-50 mt-1">Min</p>
+        </div>
+        <div class="text-center min-w-[60px]">
+            <span id="seconds" class="text-2xl md:text-4xl font-bold text-[#e19b91]">00</span>
+            <p class="text-[9px] uppercase tracking-widest opacity-50 mt-1">Sec</p>
+        </div>
+    </div>
+
+    <div class="absolute bottom-10 animate-bounce opacity-30">
+        <i class="fa-solid fa-chevron-down text-xl"></i>
+    </div>
+</section>
+
+ <section class="py-32 px-6">
+    <div class="reveal max-w-5xl mx-auto text-center">
+        
+        <div class="mb-16 reveal">
+            <div class="w-full h-[300px] md:h-[450px] rounded-[40px] overflow-hidden shadow-2xl border-[5px] border-white relative group">
+                <img src="wedding/Prewedding-5942.jpg" alt="Aum and Nok" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+        </div>
+
+
+        <p class="text-xl md:text-2xl leading-loose font-light mb-20">
+            เรามีความยินดีอย่างยิ่งที่จะเชิญทุกท่านร่วมเป็นเกียรติ <br class="hidden md:block">
+            และร่วมแสดงความยินดีในงานมงคลสมรสของเรา <br>
+            ความรักของเราจะสมบูรณ์ได้ เมื่อมีคุณมาร่วมบันทึกความทรงจำ
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+            <div class="reveal profile-container">
+                <div class="profile-round mx-auto">
+                    <img src="wedding/Prewedding-262.jpg" alt="เจ้าบ่าว" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-elegant text-4xl mt-8 mb-2">เจ้าบ่าว (อั้ม)</h3>
+                <p class="text-warm-brown/60 italic">นาย วรวิทย์ สกุลวงศ์</p>
+            </div>
+            <div class="reveal profile-container" style="transition-delay: 0.3s;">
+                <div class="profile-round mx-auto">
+                    <img src="wedding/Prewedding-351.jpg" alt="เจ้าสาว" class="w-full h-full object-cover">
+                </div>
+                <h3 class="font-elegant text-4xl mt-8 mb-2">เจ้าสาว (นก)</h3>
+                <p class="text-warm-brown/60 italic">นางสาว ชิดชนก วงษ์ไพศาล</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="py-32 bg-white/20 overflow-hidden">
+        <div class="text-center mb-20 reveal">
+            <span class="text-gold uppercase tracking-[0.3em] text-xs mb-4 block">Our Precious Moments</span>
+            <h2 class="font-elegant text-6xl md:text-7xl text-warm-brown/90">Gallery</h2>
+        </div>
+        
+        <div class="slider-container px-4">
+            <div class="slider-track" id="sliderTrack">
+                <div class="slide"><div class="no-frame"><img src="wedding\Prewedding-443.jpg" alt=""></div></div>
+                <div class="slide"><div class="no-frame"><img src="wedding\Prewedding-508.jpg" alt=""></div></div>
+                <div class="slide"><div class="no-frame"><img src="wedding\Prewedding-533.jpg" alt=""></div></div>
+                <div class="slide"><div class="no-frame"><img src="wedding\Prewedding-443.jpg" alt=""></div></div>
+                <div class="slide"><div class="no-frame"><img src="wedding\Prewedding-508.jpg" alt=""></div></div>
+                <div class="slide"><div class="no-frame"><img src="wedding\Prewedding-640.jpg" alt=""></div></div>
+            </div>
+        </div>
+
+        <div class="flex justify-center gap-8 mt-16 reveal">
+            <button onclick="moveSlider(-1)" class="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-white transition-all text-gold">
+                <i class="fa-solid fa-arrow-left-long"></i>
+            </button>
+            <button onclick="moveSlider(1)" class="w-16 h-16 rounded-full border border-gold/30 flex items-center justify-center hover:bg-gold hover:text-white transition-all text-gold">
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </button>
+        </div>
+    </section>
+
+    <section id="ceremony" class="py-32 px-6">
+        <div class="max-w-2xl mx-auto">
+            <div class="glass-card reveal">
+                <h2 class="text-center font-elegant text-5xl mb-12 border-b border-gold/20 pb-8">Wedding Schedule</h2>
+                <div class="space-y-10">
+                    <div class="flex items-start gap-8">
+                        <div class="font-script text-4xl text-soft-peach shrink-0 pt-1">07:00</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-1">พิธีสงฆ์</h4>
+                            <p class="text-sm opacity-60 italic">เริ่มต้นเช้าวันใหม่ด้วยความเป็นสิริมงคล</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-8">
+                        <div class="font-script text-4xl text-soft-peach shrink-0 pt-1">09:00</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-1">พีธีแห่ขันหมาก</h4>
+                            <p class="text-sm opacity-60 italic">พิธีตามประเพณีเพื่อเริ่มต้นชีวิตคู่</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-8">
+                        <div class="font-script text-4xl text-soft-peach shrink-0 pt-1">10:30</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-1">รับประทานอาหารกลางวัน</h4>
+                            <p class="text-sm opacity-60 italic">ร่วมรับประทานอาหารและเฉลิมฉลองกับเรา</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6 text-center bg-[#f0e6dd]">
+        <div class="reveal max-w-5xl mx-auto">
+            <h2 class="font-elegant text-5xl mb-6">Wedding Location</h2>
+            <p class="text-lg opacity-70 mb-12">บ้านเลขที่ 34/20 ม.4 ต.ทับมา อ.เมืองระยอง จ.ระยอง</p>
+            <div class="w-full h-[500px] rounded-[40px] overflow-hidden shadow-2xl border-[5px] border-white relative">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3892.518884948332!2d101.23396707507147!3d12.67300008761184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDQwJzIyLjgiTiAxMDHCsDE0JzExLjYiRQ!5e0!3m2!1sth!2sth!4v1715426000000!5m2!1sth!2sth" class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="mt-12">
+                <a href="https://maps.app.goo.gl/YourGoogleMapsLink" target="_blank" class="btn-premium">
+                    <i class="fa-solid fa-map-location-dot"></i> Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-32 text-center bg-white">
+        <div class="reveal">
+            <p class="font-script text-6xl text-soft-peach mb-6">Aum - Nok</p>
+            <div class="flex justify-center gap-4 mb-8">
+                <span class="w-8 h-[1px] bg-gold mt-3"></span>
+                <p class="text-[12px] uppercase tracking-[0.6em] opacity-40">Always - Forever</p>
+                <span class="w-8 h-[1px] bg-gold mt-3"></span>
+            </div>
+            <p class="text-[10px] opacity-30">#Aum-NokWedding2026</p>
+        </div>
+    </footer>
+
+<script>
+    // --- Falling Petals ---
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.width = Math.random() * 15 + 10 + 'px';
+        petal.style.height = petal.style.width;
+        petal.style.animationDuration = Math.random() * 3 + 5 + 's';
+        document.getElementById('petals-container').appendChild(petal);
+        setTimeout(() => petal.remove(), 8000);
+    }
+    setInterval(createPetal, 400);
+
+    // --- Optimized Slider ---
+    let currentSlide = 0;
+    function moveSlider(direction) {
+        const track = document.getElementById('sliderTrack');
+        const slides = document.querySelectorAll('.slide');
+        const visibleSlides = window.innerWidth >= 768 ? 2 : 1;
+        const maxSlide = slides.length - visibleSlides;
+
+        currentSlide += direction;
+        
+        if (currentSlide < 0) currentSlide = maxSlide;
+        else if (currentSlide > maxSlide) currentSlide = 0;
+
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const gap = 20; 
+        const moveDistance = currentSlide * (slideWidth + gap);
+        track.style.transform = `translateX(-${moveDistance}px)`;
+    }
+
+    window.addEventListener('resize', () => {
+        currentSlide = 0;
+        document.getElementById('sliderTrack').style.transform = `translateX(0)`;
+    });
+
+    // --- Countdown ---
+    function updateCountdown() {
+        const weddingDate = new Date("July 24, 2026 07:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+        
+        if (diff < 0) return;
+        
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        document.getElementById("days").innerText = d.toString().padStart(2, '0');
+        document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // --- Reveal ---
+    function reveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach(el => {
+            const windowHeight = window.innerHeight;
+            const revealTop = el.getBoundingClientRect().top;
+            if (revealTop < windowHeight - 50) el.classList.add('active');
+        });
+    }
+    window.addEventListener('scroll', reveal);
+    window.onload = reveal;
+</script>
+</body>
+</html>
